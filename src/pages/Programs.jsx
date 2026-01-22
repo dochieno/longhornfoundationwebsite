@@ -299,20 +299,20 @@ export default function Programs() {
       </Section>
 
       {/* PROGRAM PILLARS */}
-      <Section eyebrow="Focus areas" title="Program pillars" accent="brand" headingLevel={2}>
-        <div className="grid gap-5 md:grid-cols-3">
-          <ProgramCard
-            title="Literacy Support"
-            desc="Strengthening reading fluency, comprehension, vocabulary, and foundational language skills in early grades."
-            bullets={[
-              "Reading practice and structured support",
-              "Supportive learning materials",
-              "Teacher coaching for literacy instruction",
-            ]}
-            imgSrc={null}
-            tag="Pillar"
-            tone="brand"
-          />
+        <Section eyebrow="Focus areas" title="Program pillars" accent="brand" headingLevel={2}>
+          <div className="grid gap-5 md:grid-cols-3">
+            <ProgramCard
+              title="Literacy Support"
+              desc="Strengthening reading fluency, comprehension, vocabulary, and foundational language skills in early grades."
+              bullets={[
+                "Reading practice and structured support",
+                "Supportive learning materials",
+                "Teacher coaching for literacy instruction",
+              ]}
+              imgSrc="/og/hero.png"
+              tag="Pillar"
+              tone="brand"
+            />
           <ProgramCard
             title="Numeracy Support"
             desc="Building confidence with numbers, problem-solving, and practical numeracy skills for everyday learning."
