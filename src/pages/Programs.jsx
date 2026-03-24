@@ -4,7 +4,13 @@ import ImageFrame from "../components/ImageFrame.jsx";
 import { Link } from "react-router-dom";
 import { useMemo } from "react";
 
-/** CSS var + fallback so colors show even if tokens fail */
+import adultLiteracyImg from "../assets/programs/Adult-Literacy.png";
+import educationResearchImg from "../assets/programs/Education Research.png";
+import foundationalLearningImg from "../assets/programs/Foundational-Learning.png";
+import inclusivityImg from "../assets/programs/Inclusivity.jpg";
+import lastMileDigitalLearningImg from "../assets/programs/Last-Mile-Digital-Learning.png";
+import scholarshipsImg from "../assets/programs/Scholarships.png";
+
 const C = {
   ink: "var(--color-ink, #0F172A)",
 
@@ -48,7 +54,6 @@ function ProgramCard({ title, desc, bullets, imgSrc, tag = "Program", tone = "br
       className="rounded-2xl bg-white border border-black/5 overflow-hidden flex flex-col relative"
       style={{ boxShadow: "0 10px 25px rgba(15, 23, 42, 0.08)" }}
     >
-      {/* top accent bar */}
       <div
         className="absolute left-0 top-0 w-full"
         style={{
@@ -61,7 +66,7 @@ function ProgramCard({ title, desc, bullets, imgSrc, tag = "Program", tone = "br
         src={imgSrc || null}
         alt={title}
         ring="ring-black/5"
-        aspect="aspect-[16/10]"
+        aspect="aspect-[3/4]"
         className="rounded-none border-0 shadow-none"
       />
 
@@ -123,7 +128,6 @@ function OutcomeCard({ title, desc, tone = "brand" }) {
       className="rounded-2xl bg-white border border-black/5 p-7 relative overflow-hidden"
       style={{ boxShadow: "0 10px 25px rgba(15, 23, 42, 0.08)" }}
     >
-      {/* left accent strip */}
       <div className="absolute left-0 top-0 h-full" style={{ width: 5, background: accent }} />
       <div className="text-lg font-semibold" style={{ color: C.ink }}>
         {title}
@@ -163,7 +167,6 @@ function YouTubeEmbed({ url, title = "Programs video" }) {
       className="h-full flex flex-col rounded-[28px] bg-white border border-black/5 overflow-hidden"
       style={{ boxShadow: "0 10px 25px rgba(15, 23, 42, 0.08)" }}
     >
-      {/* top accent bar */}
       <div
         className="h-2"
         style={{
@@ -171,7 +174,6 @@ function YouTubeEmbed({ url, title = "Programs video" }) {
         }}
       />
 
-      {/* IMPORTANT: this grows to match left card height */}
       <div className="relative flex-1 bg-black">
         {embedUrl ? (
           <iframe
@@ -189,7 +191,6 @@ function YouTubeEmbed({ url, title = "Programs video" }) {
         )}
       </div>
 
-      {/* footer sticks to bottom */}
       <div className="p-6 flex flex-wrap items-center justify-between gap-3">
         <div>
           <div className="text-sm font-semibold" style={{ color: C.wine700 }}>
@@ -199,7 +200,7 @@ function YouTubeEmbed({ url, title = "Programs video" }) {
             {title}
           </div>
           <div className="mt-1 text-sm" style={{ color: "rgba(15,23,42,.72)" }}>
-            A short overview of how our work supports learners and teachers.
+            A short overview of how our work supports learners, teachers, and communities.
           </div>
         </div>
 
@@ -223,21 +224,17 @@ function YouTubeEmbed({ url, title = "Programs video" }) {
 export default function Programs() {
   return (
     <div>
-      {/* HERO */}
       <Section
         eyebrow="Programs"
         title="What we do"
         accent="wine"
-        subtitle="Our programs strengthen early grade literacy and numeracy through practical support for learners, teachers, and learning spaces."
+        subtitle="Our programs strengthen foundational literacy and numeracy through practical support for learners, teachers, schools, and communities."
       >
-        {/* equal height columns */}
         <div className="grid gap-6 md:grid-cols-2 items-stretch">
-          {/* Left card */}
           <div
             className="h-full rounded-[28px] bg-white border border-black/5 p-8 md:p-10 flex flex-col relative overflow-hidden"
             style={{ boxShadow: "0 10px 25px rgba(15, 23, 42, 0.08)" }}
           >
-            {/* top accent */}
             <div
               className="absolute left-0 top-0 w-full"
               style={{
@@ -248,21 +245,23 @@ export default function Programs() {
 
             <div className="flex flex-wrap gap-2">
               <Pill>Foundational learning</Pill>
-              <Pill tone="wine">Teacher support</Pill>
-              <Pill>Community learning</Pill>
+              <Pill tone="wine">Digital access</Pill>
+              <Pill>Teacher support</Pill>
+              <Pill tone="wine">Inclusive education</Pill>
             </div>
 
             <div className="mt-5 text-sm font-semibold" style={{ color: C.wine700 }}>
-              Primary focus
+              Program approach
             </div>
             <div className="mt-2 text-2xl md:text-3xl font-bold" style={{ color: C.ink }}>
-              Literacy & Numeracy foundations
+              Evidence-informed, community-driven education support
             </div>
 
             <p className="mt-3 leading-relaxed" style={{ color: "rgba(15,23,42,.72)" }}>
-              We focus on early skills because they unlock learning across all subjects. Our role is to
-              strengthen classroom practice, expand access to learning resources, and build community
-              support around the learner.
+              The Foundation delivers targeted programs that improve access to learning resources,
+              strengthen instructional quality, and create enabling environments for sustained learning.
+              The goal is not only school attendance, but real gains in literacy, numeracy, inclusion,
+              and long-term educational participation.
             </p>
 
             <div className="mt-auto pt-6 flex flex-wrap gap-3">
@@ -290,7 +289,6 @@ export default function Programs() {
             </div>
           </div>
 
-          {/* Right card (video) — EXACT SAME HEIGHT as left */}
           <YouTubeEmbed
             url="https://www.youtube.com/watch?v=zTeKb3V_-ZE"
             title="Longhorn Foundation Programs — Overview"
@@ -298,71 +296,121 @@ export default function Programs() {
         </div>
       </Section>
 
-      {/* PROGRAM PILLARS */}
-        <Section eyebrow="Focus areas" title="Program pillars" accent="brand" headingLevel={2}>
-          <div className="grid gap-5 md:grid-cols-3">
-            <ProgramCard
-              title="Literacy Support"
-              desc="Strengthening reading fluency, comprehension, vocabulary, and foundational language skills in early grades."
-              bullets={[
-                "Reading practice and structured support",
-                "Supportive learning materials",
-                "Teacher coaching for literacy instruction",
-              ]}
-              imgSrc="/og/hero.png"
-              tag="Pillar"
-              tone="brand"
-            />
+      <Section
+        eyebrow="Focus areas"
+        title="Our programs"
+        accent="brand"
+        headingLevel={2}
+        subtitle="Six complementary programs designed to improve foundational learning access, quality, and equity."
+      >
+        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           <ProgramCard
-            title="Numeracy Support"
-            desc="Building confidence with numbers, problem-solving, and practical numeracy skills for everyday learning."
+            title="Foundational Learning Acceleration Program (FLAP)"
+            desc="Strengthens early grade literacy and numeracy outcomes through structured teaching approaches, quality learning materials, and continuous learner assessment."
             bullets={[
-              "Number sense and problem-solving activities",
-              "Classroom-friendly tools and methods",
-              "Support for learners who need a boost",
+              "Reading fluency, comprehension, and number sense",
+              "Teacher coaching and guided instruction",
+              "Improved lesson delivery and learner engagement",
             ]}
-            imgSrc={null}
-            tag="Pillar"
+            imgSrc={foundationalLearningImg}
+            tag="Flagship"
             tone="brand"
           />
+
           <ProgramCard
-            title="Community Learning Hubs"
-            desc="Creating and strengthening spaces beyond the classroom where children can read, practice, and stay engaged."
+            title="Last-Mile Digital Learning & Content Access"
+            desc="Expands access to curriculum-aligned educational content through inclusive digital and blended learning solutions for underserved and hard-to-reach areas."
             bullets={[
-              "Partnerships with libraries and learning centers",
-              "After-school reading and learning sessions",
-              "Community participation and ownership",
+              "Offline learning platforms and devices",
+              "Digital content access for schools and communities",
+              "Teacher and facilitator support for digital instruction",
             ]}
-            imgSrc={null}
+            imgSrc={lastMileDigitalLearningImg}
+            tag="Digital"
+            tone="wine"
+          />
+
+          <ProgramCard
+            title="Community Learning & Adult Literacy"
+            desc="Builds safe, inclusive, and accessible learning spaces in communities while strengthening reading, numeracy, and caregiver engagement at household level."
+            bullets={[
+              "Community libraries, school centers, and youth hubs",
+              "Read & Rise expansion",
+              "Adult literacy and reading culture support",
+            ]}
+            imgSrc={adultLiteracyImg}
+            tag="Community"
+            tone="brand"
+          />
+
+          <ProgramCard
+            title="Education Research, Data & Policy Lab"
+            desc="Generates and applies evidence to improve literacy and numeracy programming through research, assessments, evaluation, and policy engagement."
+            bullets={[
+              "Research studies and learning assessments",
+              "Program evaluation and data analysis",
+              "Knowledge sharing and policy engagement",
+            ]}
+            imgSrc={educationResearchImg}
+            tag="Evidence"
+            tone="wine"
+          />
+
+          <ProgramCard
+            title="Inclusive Education & Gender Equity"
+            desc="Promotes equitable access to foundational education for learners of all genders, abilities, and socioeconomic backgrounds."
+            bullets={[
+              "Inclusive learning practices",
+              "Targeted outreach for marginalized learners",
+              "Capacity building for educators",
+            ]}
+            imgSrc={inclusivityImg}
+            tag="Inclusion"
+            tone="brand"
+          />
+
+          <ProgramCard
+            title="Scholarships & Education Access Support"
+            desc="Supports vulnerable and high-potential learners through scholarships, bursaries, mentorship, and learner support systems that improve retention and progression."
+            bullets={[
+              "Scholarships and bursaries",
+              "Academic guidance and mentorship",
+              "Retention and transition support",
+            ]}
+            imgSrc={scholarshipsImg}
             tag="Access"
             tone="wine"
           />
         </div>
       </Section>
 
-      {/* WHAT IT LOOKS LIKE */}
       <Section
-        eyebrow="In practice"
-        title="What implementation can include"
+        eyebrow="How we work"
+        title="Operational approach"
         accent="wine"
         headingLevel={2}
-        subtitle="Programs are adapted to context—school needs, community priorities, and partnership models."
+        subtitle="Programs are strengthened by partnerships, accountability, learning, and safeguarding."
       >
-        <div className="grid gap-5 md:grid-cols-3">
+        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
           <OutcomeCard
-            title="Teacher training & coaching"
-            desc="Workshops, mentorship, and practical tools that strengthen instruction and classroom routines."
+            title="Strategic partnerships"
+            desc="We work with public schools, county governments, national education authorities, NGOs, and community institutions to align with education priorities and strengthen sustainability."
             tone="brand"
           />
           <OutcomeCard
-            title="Learning resources"
-            desc="Textbooks, readers, numeracy kits, and supportive materials that increase practice and engagement."
+            title="Financial management & accountability"
+            desc="Strong internal controls, transparent reporting, and prudent stewardship support compliance and effective use of resources."
             tone="wine"
           />
           <OutcomeCard
-            title="Community engagement"
-            desc="Reading culture initiatives, parent/community participation, and locally supported learning spaces."
+            title="Monitoring, Evaluation & Learning"
+            desc="A data-driven MEL framework tracks progress, measures outcomes, and informs continuous improvement and evidence-based decision-making."
             tone="brand"
+          />
+          <OutcomeCard
+            title="Child safeguarding & protection"
+            desc="Comprehensive safeguarding measures help ensure learning environments are safe, inclusive, respectful, and responsive."
+            tone="wine"
           />
         </div>
 
@@ -376,7 +424,7 @@ export default function Programs() {
           }}
         >
           <div className="text-sm" style={{ color: "rgba(15,23,42,.8)" }}>
-            Looking for a partnership, school support, or a community initiative?
+            Looking for a partnership, school support, research collaboration, or a community initiative?
             <span className="font-semibold"> Let’s build it together.</span>
           </div>
 

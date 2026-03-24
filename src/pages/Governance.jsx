@@ -1,9 +1,15 @@
 // src/pages/Governance.jsx
+import { useState } from "react";
 import Section from "../components/Section.jsx";
-import PersonCard from "../components/PersonCard.jsx";
 import ImageFrame from "../components/ImageFrame.jsx";
 import { Link } from "react-router-dom";
 import { C, SHADOW, SHADOW_SOFT } from "../styles/brand";
+
+import fezileMaunchoImg from "../assets/governance/fezile-mauncho.png";
+import heroImage from "../assets/governance/Hero-Image.png";
+import josphatLowoiImg from "../assets/governance/josphat-lowoi.png";
+import makennaNyammoImg from "../assets/governance/makenna-nyammo.png";
+import pritchardOnyangoImg from "../assets/governance/pritchard-onyango.png";
 
 function cn(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -113,10 +119,8 @@ function InfoCard({ title, desc, tone = "brand", tag }) {
         background: `linear-gradient(180deg, ${tint} 0%, white 55%)`,
       }}
     >
-      {/* SUPER visible accent */}
       <div className="absolute left-0 top-0 h-full" style={{ width: 14, background: accent }} />
 
-      {/* subtle glow */}
       <div
         className="pointer-events-none absolute -top-16 -right-16 h-48 w-48 rounded-full blur-3xl"
         style={{ background: `color-mix(in srgb, ${accent} 22%, transparent)` }}
@@ -148,6 +152,182 @@ function InfoCard({ title, desc, tone = "brand", tag }) {
   );
 }
 
+function GovernanceProfileCard({ profile, tone = "wine" }) {
+  const [expanded, setExpanded] = useState(false);
+  const isWine = tone === "wine";
+  const accent = isWine ? C.wine500 : C.brand500;
+  const tint = isWine ? C.wine50 : C.brand50;
+
+  return (
+    <div
+      className="rounded-3xl border border-black/5 overflow-hidden bg-white"
+      style={{
+        boxShadow: SHADOW,
+        background: `linear-gradient(180deg, ${tint} 0%, white 42%)`,
+      }}
+    >
+      <div
+        className="h-3"
+        style={{
+          background: `linear-gradient(90deg, ${accent} 0%, ${
+            isWine ? C.wine200 : C.brand200
+          } 55%, ${C.brand500} 120%)`,
+        }}
+      />
+
+      <div className="p-5">
+        <div className="mb-5">
+          <ImageFrame
+            src={profile.imageSrc || null}
+            alt={profile.imageAlt || profile.name}
+            caption={profile.imageSrc ? undefined : "Profile image to be added."}
+            ring="ring-black/5"
+            aspect="aspect-[3/3]"
+          />
+        </div>
+
+        <div className="flex flex-wrap items-start justify-between gap-3">
+          <div>
+            <h3 className="text-lg font-semibold leading-snug" style={{ color: C.ink }}>
+              {profile.name}
+            </h3>
+            <p className="mt-1 text-sm font-medium" style={{ color: accent }}>
+              {profile.role}
+            </p>
+          </div>
+
+          {profile.tag ? (
+            <span
+              className="text-xs font-semibold rounded-full px-3 py-1 border"
+              style={{
+                background: isWine ? C.wine100 : C.brand100,
+                color: isWine ? C.wine800 : C.brand800,
+                borderColor: isWine ? C.wine200 : C.brand200,
+              }}
+            >
+              {profile.tag}
+            </span>
+          ) : null}
+        </div>
+
+        <p className="mt-4 text-sm leading-relaxed" style={{ color: "rgba(15,23,42,.78)" }}>
+          {profile.summary}
+        </p>
+
+        {expanded ? (
+          <div className="mt-4 space-y-3">
+            {profile.details?.map((item, index) => (
+              <p
+                key={index}
+                className="text-sm leading-relaxed"
+                style={{ color: "rgba(15,23,42,.72)" }}
+              >
+                {item}
+              </p>
+            ))}
+
+            {profile.motto ? (
+              <div
+                className="rounded-2xl px-4 py-3 text-sm italic"
+                style={{
+                  background: "rgba(15,23,42,.035)",
+                  color: "rgba(15,23,42,.72)",
+                }}
+              >
+                “{profile.motto}”
+              </div>
+            ) : null}
+          </div>
+        ) : null}
+
+        <button
+          type="button"
+          onClick={() => setExpanded((v) => !v)}
+          className="mt-5 inline-flex items-center rounded-xl px-4 py-2 text-sm font-semibold border transition"
+          style={{
+            borderColor: "rgba(15,23,42,.10)",
+            color: accent,
+            background: "white",
+            boxShadow: SHADOW_SOFT,
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = "rgba(15,23,42,.04)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = "white";
+          }}
+        >
+          {expanded ? "View less" : "View more"}
+        </button>
+      </div>
+    </div>
+  );
+}
+
+const trustees = [
+  {
+    name: "Makenna Nyammo",
+    role: "Chairperson",
+    tag: "Board Leadership",
+    imageSrc: makennaNyammoImg,
+    imageAlt: "Makenna Nyammo",
+    summary:
+      "A seasoned leader with over 35 years of experience in business strategy, brand management, governance, and organizational growth.",
+    details: [
+      "She brings strong corporate leadership and a deep commitment to education and community development, helping guide the Foundation’s mission around literacy, numeracy, and meaningful learning outcomes.",
+      "She serves as Executive Director at Thammo Holdings Limited and as a Non-Executive Director at Longhorn Publishers Plc, where she provides strategic oversight and promotes ethical governance.",
+      "Her experience includes high-impact work with leading brands such as DHL, Coca-Cola, MultiChoice, and Shell.",
+    ],
+    motto:
+      "A child who reads for pleasure will outlearn a child who reads for grades every single time. Curiosity beats compliance.",
+  },
+  {
+    name: "Pritchard Moth Onyango",
+    role: "Trustee",
+    tag: "Inclusive Education",
+    imageSrc: pritchardOnyangoImg,
+    imageAlt: "Pritchard Moth Onyango",
+    summary:
+      "An education and gender development practitioner with 19 years of experience in early learning, inclusive education, and gender equality.",
+    details: [
+      "His expertise includes research, programme design, curriculum development, teacher support materials, learner resources, and low-cost teaching aids for diverse learning environments.",
+      "He currently serves as Chief Executive Officer of Kindergarten Experts International, providing technical leadership, advisory support, and capacity building for education initiatives.",
+      "He has also served with Humanity & Inclusion, Plan International Kenya, and WERK, with a strong focus on girls’ education, disability inclusion, and community engagement.",
+      "He holds a Master of Arts in Education, Gender and International Development from University College London and a Bachelor of Education in Early Childhood Education from Kenyatta University.",
+    ],
+  },
+  {
+    name: "Hon. Josphat Lodeya Lowoi, OGW",
+    role: "Trustee",
+    tag: "Public Leadership",
+    imageSrc: josphatLowoiImg,
+    imageAlt: "Hon. Josphat Lodeya Lowoi, OGW",
+    summary:
+      "A senior civil servant and public leader with strong experience in inclusive governance, cultural recognition, and advocacy for marginalized communities.",
+    details: [
+      "He currently serves as Secretary for the Minorities and Marginalized Communities Affairs Unit at the Executive Office of the President.",
+      "In this role, he leads national efforts supporting over 79 Ethnic Minority and Marginalized Communities through programmes focused on inclusive governance, education access, cultural preservation, and socio-economic empowerment.",
+      "He previously served two terms as Member of the County Assembly in Uasin Gishu County and also as Assembly Majority Leader.",
+      "He is a recipient of the Order of the Grand Warrior state honour and is recognized for his advocacy for inclusion and national cohesion.",
+    ],
+  },
+  {
+    name: "Fezile Mauncho",
+    role: "Trustee",
+    tag: "Regenerative Learning",
+    imageSrc: fezileMaunchoImg,
+    imageAlt: "Fezile Mauncho",
+    summary:
+      "A Kenyan educator and systems practitioner with deep experience in regenerative, community-based, and culturally grounded learning approaches.",
+    details: [
+      "Her work spans educational design, interdisciplinary pedagogy, community engagement, and the development of learning environments rooted in culture, ecology, and indigenous knowledge.",
+      "She is the co-founder of Kitovu Learning Space, a nature-inspired educational biome for learners aged 5–19, where she supports relational and experiential learning.",
+      "She has collaborated with teachers, parents, mentors, organizations, and businesses across Kenya to build partnerships that extend learning beyond traditional classrooms.",
+      "She also contributes to storytelling and cultural preservation through Daraja Band, a musical collective focused on healing and cultural memory.",
+    ],
+  },
+];
+
 export default function Governance() {
   return (
     <div
@@ -158,7 +338,6 @@ export default function Governance() {
           white 75%)`,
       }}
     >
-      {/* INTRO */}
       <Section
         eyebrow="Governance"
         title="Leadership & accountability"
@@ -166,13 +345,11 @@ export default function Governance() {
         subtitle="Good governance protects learners, strengthens partnerships, and ensures responsible stewardship of resources."
       >
         <div className="grid gap-6 md:grid-cols-2 items-stretch">
-          {/* Left hero card */}
           <BrandedShell tone="mix">
             <div
               className="h-full border border-black/5 p-8 md:p-10 relative overflow-hidden flex flex-col rounded-[28px]"
               style={{ boxShadow: SHADOW }}
             >
-              {/* VERY visible top band */}
               <div
                 className="absolute left-0 top-0 w-full"
                 style={{
@@ -195,15 +372,16 @@ export default function Governance() {
               </div>
 
               <p className="mt-3 leading-relaxed" style={{ color: "rgba(15,23,42,.72)" }}>
-                The Foundation is guided by a Board of Trustees that provides strategic oversight and accountability,
-                supported by a management team responsible for operations and program delivery.
+                The Foundation is guided by a Board of Trustees that provides strategic oversight,
+                accountability, and direction for the organization, while management supports daily
+                operations and program delivery.
               </p>
 
               <div className="mt-6 grid gap-2">
                 <Bullet>Strategic oversight and responsible stewardship</Bullet>
                 <Bullet tone="wine">Transparent decision-making and compliance</Bullet>
                 <Bullet>Safeguarding and ethical partnerships</Bullet>
-                <Bullet tone="wine">Clear accountability for results and learning (MEL)</Bullet>
+                <Bullet tone="wine">Clear accountability for results and learning</Bullet>
               </div>
 
               <div className="mt-auto pt-7 flex flex-wrap gap-3">
@@ -217,7 +395,6 @@ export default function Governance() {
             </div>
           </BrandedShell>
 
-          {/* Right hero image card */}
           <BrandedShell tone="wine">
             <div
               className="h-full border border-black/5 overflow-hidden flex flex-col rounded-[28px]"
@@ -231,9 +408,9 @@ export default function Governance() {
               />
               <div className="flex-1">
                 <ImageFrame
-                  src={null}
-                  alt="Governance"
-                  caption="Add a governance/board image here (optional)."
+                  src={heroImage}
+                  alt="Longhorn Foundation Board of Trustees"
+                  caption={undefined}
                   ring="ring-black/5"
                   aspect="aspect-[16/11]"
                 />
@@ -243,7 +420,6 @@ export default function Governance() {
         </div>
       </Section>
 
-      {/* GOVERNANCE MODEL */}
       <Section
         eyebrow="Structure"
         title="How oversight and delivery work together"
@@ -254,19 +430,19 @@ export default function Governance() {
         <div className="grid gap-5 md:grid-cols-3">
           <InfoCard
             title="Board of Trustees"
-            desc="Provides strategic direction, governance oversight, and accountability to ensure the Foundation remains aligned to its mandate."
+            desc="Provides strategic direction, governance oversight, and accountability to keep the Foundation aligned to its mission and mandate."
             tone="wine"
             tag="Oversight"
           />
           <InfoCard
             title="Management Team"
-            desc="Leads day-to-day operations and program implementation, coordinating partners and ensuring quality delivery."
+            desc="Leads day-to-day operations, programme implementation, partner coordination, and internal execution."
             tone="brand"
             tag="Delivery"
           />
           <InfoCard
             title="Accountability & Learning"
-            desc="Monitoring, Evaluation & Learning (MEL) supports transparency, tracks progress, and helps improve program effectiveness."
+            desc="Supports transparency, tracks progress, and helps strengthen programme effectiveness through learning and evidence."
             tone="brand"
             tag="MEL"
           />
@@ -291,25 +467,22 @@ export default function Governance() {
         </BrandedShell>
       </Section>
 
-      {/* BOARD */}
       <Section eyebrow="Board" title="Board of Trustees" accent="wine" headingLevel={2}>
         <p className="text-sm leading-relaxed" style={{ color: "rgba(15,23,42,.72)" }}>
-          The Board of Trustees provides oversight, approves strategic priorities, and supports integrity and accountability
-          across operations and partnerships.
+        The Board of Trustees offers strategic guidance, robust governance, and oversight to
+        ensure organizational accountability and long‑term sustainability. The Board is
+        composed of individuals with extensive expertise across corporate leadership,
+        inclusive education, public service, and regenerative learning. Together, they
+        provide informed direction and uphold the mission, values, and integrity of the institution.
         </p>
 
-        <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          <PersonCard name="Name Surname" role="Chairperson" />
-          <PersonCard name="Name Surname" role="Trustee" />
-          <PersonCard name="Name Surname" role="Trustee" />
+        <div className="mt-6 grid gap-5 md:grid-cols-2">
+          {trustees.map((profile) => (
+            <GovernanceProfileCard key={profile.name} profile={profile} tone="wine" />
+          ))}
         </div>
-
-        <p className="mt-6 text-sm" style={{ color: "rgba(15,23,42,.55)" }}>
-          Replace names/roles with the official list from your Foundation Profile.
-        </p>
       </Section>
 
-      {/* MANAGEMENT */}
       <Section
         eyebrow="Management"
         title="Management Team"
@@ -318,9 +491,36 @@ export default function Governance() {
         subtitle="The management team supports day-to-day delivery and partnership coordination."
       >
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          <PersonCard name="Name Surname" role="Executive Director" />
-          <PersonCard name="Name Surname" role="Programs & Partnerships" />
-          <PersonCard name="Name Surname" role="Operations & Compliance" />
+          <GovernanceProfileCard
+            tone="brand"
+            profile={{
+              name: "Profile name",
+              role: "Executive Director",
+              tag: "To update",
+              summary: "Add official management profile details here.",
+              details: ["Leave space for profile image and a short operational biography."],
+            }}
+          />
+          <GovernanceProfileCard
+            tone="brand"
+            profile={{
+              name: "Profile name",
+              role: "Programs & Partnerships",
+              tag: "To update",
+              summary: "Add official management profile details here.",
+              details: ["Leave space for profile image and a short operational biography."],
+            }}
+          />
+          <GovernanceProfileCard
+            tone="brand"
+            profile={{
+              name: "Profile name",
+              role: "Operations & Compliance",
+              tag: "To update",
+              summary: "Add official management profile details here.",
+              details: ["Leave space for profile image and a short operational biography."],
+            }}
+          />
         </div>
 
         <div

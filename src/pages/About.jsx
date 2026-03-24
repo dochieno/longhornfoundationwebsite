@@ -30,7 +30,6 @@ function BrandedCard({ title, children, tag, tone = "brand", accent = "left" }) 
       className="rounded-2xl bg-white border border-black/5 p-7 relative overflow-hidden"
       style={{ boxShadow: SHADOW_SOFT }}
     >
-      {/* thicker accents so they actually show */}
       {accent === "left" ? (
         <div className="absolute left-0 top-0 h-full" style={{ width: 6, background: accentColor }} />
       ) : (
@@ -117,7 +116,6 @@ function YouTubeEmbed({ url, title = "Longhorn Foundation video" }) {
       className="rounded-[28px] bg-white border border-black/5 overflow-hidden h-full flex flex-col"
       style={{ boxShadow: SHADOW_SOFT }}
     >
-      {/* visible top accent */}
       <div
         style={{
           height: 6,
@@ -125,8 +123,7 @@ function YouTubeEmbed({ url, title = "Longhorn Foundation video" }) {
         }}
       />
 
-      {/* flex-1 makes video area stretch so this card matches the left stack height */}
-      <div className="relative bg-black flex-1 min-h-[260px]">
+      <div className="relative bg-black flex-1 min-h-65">
         {embedUrl ? (
           <iframe
             className="absolute inset-0 h-full w-full"
@@ -182,21 +179,29 @@ export default function About() {
         eyebrow="About"
         title="Our story and mandate"
         accent="wine"
-        subtitle="Who we are, why we exist, and the principles that guide our work."
+        subtitle="Who we are, why we exist, and how we strengthen foundational learning for underserved children in Kenya and beyond."
       >
-        {/* items-stretch is the key to equal-height columns */}
         <div className="grid gap-6 md:grid-cols-2 items-stretch">
           <div className="grid gap-6">
             <BrandedCard title="Who we are" tag="Foundation" tone="brand">
-              Longhorn Foundation Trust is a Corporate Social Responsibility (CSR)
-              initiative of Longhorn Publishers PLC. We exist to strengthen foundational
-              learning outcomes by supporting schools, teachers, and communities with
-              sustainable education interventions.
+              Longhorn Foundation Trust is a Corporate Social Responsibility initiative of
+              Longhorn Publishers PLC. Established under the auspices of the company and
+              inspired by the vision of its founding Chair, the Late FT Nyammo, the Foundation
+              was fully accredited in July 2025 and builds on more than 60 years of contribution
+              to literacy and numeracy initiatives in Kenya and beyond.
             </BrandedCard>
 
-            <BrandedCard title="Where we work" tag="Region" tone="wine">
-              We focus on Kenya and the wider East Africa region, prioritizing underserved
-              communities and supporting partners to improve early grade literacy and numeracy.
+            <BrandedCard title="What we do" tag="Mandate" tone="wine">
+              The Foundation strengthens foundational literacy and numeracy through inclusive,
+              sustainable education programs. It leverages high-quality educational resources,
+              including textbooks and storybooks aligned to the curriculum, together with teacher
+              training, mentorship, and direct support to schools and communities.
+            </BrandedCard>
+
+            <BrandedCard title="Where we work" tag="Region" tone="brand">
+              We work in Kenya and beyond, with strong relevance across East Africa, prioritizing
+              underserved and marginalized communities and building supportive learning environments
+              through partnerships with educators, communities, and other stakeholders.
             </BrandedCard>
           </div>
 
@@ -210,13 +215,14 @@ export default function About() {
       <Section eyebrow="Direction" title="Mission and vision" accent="brand" headingLevel={2}>
         <div className="grid gap-5 md:grid-cols-2">
           <BrandedCard title="Mission" tag="Mission" tone="brand" accent="top">
-            Strengthen early literacy and numeracy through innovative, inclusive, and sustainable
-            programs—empowering teachers, supporting schools, and engaging communities.
+            To advance education in Kenya and beyond by equipping underserved children with
+            strong foundational literacy and numeracy skills, fostering lifelong learning,
+            personal growth, and meaningful societal contribution.
           </BrandedCard>
 
           <BrandedCard title="Vision" tag="Vision" tone="wine" accent="top">
-            Transform education in Kenya and East Africa, ensuring every child builds strong foundational
-            literacy and numeracy skills for meaningful contribution.
+            Transforming education in Kenya and beyond by equipping underserved children with
+            foundational literacy and numeracy skills.
           </BrandedCard>
         </div>
       </Section>
@@ -229,11 +235,31 @@ export default function About() {
         headingLevel={2}
       >
         <div className="grid gap-5 md:grid-cols-2">
-          <ValueCard letter="E" word="Equity" desc="Prioritizing underserved communities so every learner can access support and opportunity." />
-          <ValueCard letter="Q" word="Quality" desc="Designing and delivering high-standard programs that improve learning outcomes." />
-          <ValueCard letter="U" word="Understanding" desc="Listening to communities and responding to real needs with relevant solutions." />
-          <ValueCard letter="I" word="Integrity" desc="Practicing transparency, accountability, and ethical stewardship in all partnerships." />
-          <ValueCard letter="P" word="Purpose" desc="Staying focused on meaningful outcomes—strong foundations for lifelong learning." />
+          <ValueCard
+            letter="E"
+            word="Equity"
+            desc="Ensuring all children, regardless of gender, ability, or socioeconomic background, can access quality foundational literacy and numeracy education, especially in underserved communities."
+          />
+          <ValueCard
+            letter="Q"
+            word="Quality"
+            desc="Providing excellence in educational programs that improve learning outcomes, strengthen teacher capacity, and support better school performance."
+          />
+          <ValueCard
+            letter="U"
+            word="Understanding"
+            desc="Engaging meaningfully with learners, educators, and communities to design inclusive and relevant responses to real literacy and numeracy challenges."
+          />
+          <ValueCard
+            letter="I"
+            word="Integrity"
+            desc="Maintaining transparency, accountability, and ethical practice in operations, partnerships, and resource management."
+          />
+          <ValueCard
+            letter="P"
+            word="Purpose"
+            desc="Driving impactful education initiatives that strengthen foundational learning, empower teachers, and support community engagement."
+          />
         </div>
       </Section>
     </div>
